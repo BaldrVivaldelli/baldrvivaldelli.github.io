@@ -1,0 +1,54 @@
+---
+import '@fontsource-variable/literata/wght.css';
+import '@fontsource-variable/literata/wght-italic.css';
+import '../styles/global.css';
+import { SITE } from '../site';
+import { url } from '../lib/url';
+
+interface Props {
+	title?: string;
+	description?: string;
+	article?: boolean;
+}
+
+const { title, description = SITE.description, article = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<title>{title ? `${title} · ${SITE.name}` : SITE.name}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content={SITE.author} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+		<link rel="alternate" type="application/rss+xml" title={SITE.name} href={new URL(url('rss.xml'), Astro.site)} />
+		<link rel="sitemap" href={url('sitemap-index.xml')} />
+		<meta property="og:type" content={article ? 'article' : 'website'} />
+		<meta property="og:site_name" content={SITE.name} />
+		<meta property="og:title" content={title ?? SITE.name} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:locale" content="es_AR" />
+	</head>
+	<body>
+		<a class="skip" href="#contenido">Ir al contenido</a>
+		<header class="site">
+			<a class="brand" href={url()}>{SITE.name}</a>
+			<nav aria-label="Enlaces">
+				<a href={url('rss.xml')}>RSS</a>
+				<a href={SITE.github}>GitHub</a>
+			</nav>
+		</header>
+		<main id="contenido">
+			<slot />
+		</main>
+		<footer class="site">
+			<p>{SITE.author} · <a href={SITE.github}>GitHub</a> · <a href={SITE.x}>X</a></p>
+		</footer>
+	</body>
+</html>

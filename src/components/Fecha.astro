@@ -1,0 +1,12 @@
+---
+interface Props {
+	date: Date;
+}
+
+const { date } = Astro.props;
+// Dates are calendar days written in UTC; formatting them in UTC keeps the
+// build machine's time zone from moving them a day.
+const text = date.toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+
+<time datetime={date.toISOString().slice(0, 10)}>{text}</time>

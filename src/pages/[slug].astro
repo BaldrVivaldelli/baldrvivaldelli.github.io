@@ -1,0 +1,28 @@
+---
+import 'katex/dist/katex.min.css';
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Fecha from '../components/Fecha.astro';
+import { notas, type Nota } from '../lib/notas';
+import { url } from '../lib/url';
+import { BRANCH, REPO } from '../site';
+
+export async function getStaticPaths() {
+	return (await notas()).map((nota) => ({ params: { slug: nota.slug }, props: { nota } }));
+}
+
+const { nota } = Astro.props as { nota: Nota };
+const { Content } = await render(nota.entry);
+const source = REPO && nota.entry.filePath ? `https://github.com/${REPO}/blob/${BRANCH}/${nota.entry.filePath}` : '';
+---
+
+<Base title={nota.title} description={nota.description} article>
+	<article class="nota">
+		<Fecha date={nota.date} />
+		<Content />
+	</article>
+	<nav class="pie" aria-label="Más">
+		<a href={url()}>Todas las notas</a>
+		{source && <a href={source}>Ver el markdown en GitHub</a>}
+	</nav>
+</Base>

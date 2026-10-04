@@ -1,34 +1,27 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Base from '../layouts/Base.astro';
+import Fecha from '../components/Fecha.astro';
+import { notas } from '../lib/notas';
+import { url } from '../lib/url';
+import { SITE } from '../site';
+
+const list = await notas();
 ---
 
-<!doctype html>
-<html lang="en">
-<head>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-</head>
-<body>
-<Header />
-<main>
-	<h1>🧑‍🚀 Bienvenido</h1>
-	<p>
-		Mi nombre es Augusto Vivaldelli, soy un dev desde hace muchas décadas.
-		Me gusta el estudio de las ciencias de la computación en su amplitud. Acá dejo las notas que me van interesando que persistan para un futuro.
-	</p>
-	<h2>Tópicos que abordo:</h2>
-	<ul>
-		<li>Programación funcional</li>
-		<li>Desarrollo de software en general</li>
-		<li>Arquitectura de sistemas</li>
-		<li>Homelabs y automatización</li>
-		<li>Infraestructura y nube (AWS, Docker, etc.)</li>
-		<li>Reflexiones sobre tecnología y humanidad</li>
+<Base>
+	<section class="intro">
+		<h1>{SITE.name}</h1>
+		<p>{SITE.description}</p>
+	</section>
+	<ul class="notas">
+		{
+			list.map((nota) => (
+				<li>
+					<Fecha date={nota.date} />
+					<a href={url(`${nota.slug}/`)}>{nota.title}</a>
+					{nota.description && <p>{nota.description}</p>}
+				</li>
+			))
+		}
 	</ul>
-	<p> Si te interesa preguntarme algo o teens alguna duda de algun topico de CS, te dejo mis social en el footer.</p>
-</main>
-<Footer />
-</body>
-</html>
+</Base>
