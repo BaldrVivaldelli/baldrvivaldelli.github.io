@@ -21,11 +21,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="color-scheme" content="light dark" />
-		<title>{title ? `${title} · ${SITE.name}` : SITE.name}</title>
+		<!-- The name goes first so that a narrow tab still shows it. -->
+		<title>{title ? `${SITE.name} · ${title}` : SITE.name}</title>
 		<meta name="description" content={description} />
 		<meta name="author" content={SITE.author} />
 		<link rel="canonical" href={canonical} />
+		<link rel="icon" href={url('favicon.ico')} sizes="32x32" />
 		<link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+		<link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
 		<link rel="alternate" type="application/rss+xml" title={SITE.name} href={new URL(url('rss.xml'), Astro.site)} />
 		<link rel="sitemap" href={url('sitemap-index.xml')} />
 		<meta property="og:type" content={article ? 'article' : 'website'} />
