@@ -108,6 +108,12 @@ Le pedí diez páginas web completas, todas distintas. Escribió tres enteras, a
 
 Las descripciones de 36 herramientas del Open-WebUI: buscar en mis documentos, en mis chats y en mis memorias, la fecha, preguntarme algo. Las manda en cada pedido, y la plantilla del modelo las escribe al principio del prompt. Para un servicio en la nube son centavos. Para un motor que lee a veinte tokens por segundo son seis minutos. El frente ahora las ignora: el mismo tipo de mensaje llegó como 24 tokens, el motor lo leyó en un segundo y la respuesta empezó a los veinte, después de otra tarea que el Open-WebUI le pide al modelo antes de contestar. Las herramientas no las usaba. El costo lo pagaba igual.
 
+## El cuaderno, abierto
+
+Todo esto está en [pasada](https://github.com/BaldrVivaldelli/pasada). Está el código del motor y del servidor, y está el guion de cada medición, con las líneas exactas que se corrieron. Están también los resultados crudos y un informe por etapa, de la primera medición de OLMoE hasta la charla de esta noche.
+
+No es un programa para instalar: corre un solo modelo, por Vulkan, y se probó en una sola PC. Es un cuaderno de laboratorio. Claude escribió los informes para mí mientras trabajábamos, en castellano y de vos, y los dejé como están: cuentan también lo que salió mal y las veces que hubo que corregir un informe anterior. El README dice cómo reproducirlo: llama.cpp en un commit fijo con un parche, el motor y los cuatro archivos del modelo.
+
 ## Lo que me llevo
 
 Seis reglas.
