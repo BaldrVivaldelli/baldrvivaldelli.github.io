@@ -100,9 +100,13 @@ El contexto largo tiene su precio. La atención dispersa le suma 1,3 milisegundo
 
 ## La primera charla
 
-Esta noche abrí el Open-WebUI y elegí el motor. Escribí un mensaje de cien caracteres, y al motor le llegó un prompt de 6.651 tokens: lo que el Open-WebUI agrega a cada pedido. Leerlo llevó seis minutos. Antes de cada respuesta, el Open-WebUI pide además una tarea corta y, después, un título y etiquetas, todo al mismo modelo.
+Esta noche abrí el Open-WebUI y elegí el motor. Escribí un mensaje de cien caracteres, y al motor le llegó un prompt de 6.651 tokens. Leerlo llevó seis minutos.
 
 Le pedí diez páginas web completas, todas distintas. Escribió tres enteras, a 16 tokens por segundo, y en la cuarta se quedó sin lugar: los 6.651 tokens del pedido y 9.713 de respuesta llenan las 16.384 posiciones. No era una falla. Era un pedido que no entraba.
+
+**¿Qué eran los otros 6.500 tokens?**
+
+Las descripciones de 36 herramientas del Open-WebUI: buscar en mis documentos, en mis chats y en mis memorias, la fecha, preguntarme algo. Las manda en cada pedido, y la plantilla del modelo las escribe al principio del prompt. Para un servicio en la nube son centavos. Para un motor que lee a veinte tokens por segundo son seis minutos. El frente ahora las ignora: el mismo tipo de mensaje llegó como 24 tokens, el motor lo leyó en un segundo y la respuesta empezó a los veinte, después de otra tarea que el Open-WebUI le pide al modelo antes de contestar. Las herramientas no las usaba. El costo lo pagaba igual.
 
 ## Lo que me llevo
 
